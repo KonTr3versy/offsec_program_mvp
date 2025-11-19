@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  offsec-program:
+    build:
+      context: ..
+      dockerfile: deploy/docker/Dockerfile
+    container_name: offsec-program
+    environment:
+      - DATABASE_URL=sqlite:///./offsec_program.db
+      - REQUIRE_API_KEY=true
+      - OFFSEC_ENV=prod
+    ports:
+      - "8000:8000"
+    restart: unless-stopped

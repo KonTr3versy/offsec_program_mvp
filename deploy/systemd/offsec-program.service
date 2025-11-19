@@ -1,0 +1,19 @@
+[Unit]
+Description=Offensive Security Program MVP API
+After=network.target
+
+[Service]
+# Adjust user/group and paths as appropriate for your environment
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/offsec_program_mvp
+Environment="DATABASE_URL=sqlite:///./offsec_program.db"
+Environment="REQUIRE_API_KEY=true"
+Environment="OFFSEC_ENV=prod"
+ExecStart=/home/ubuntu/offsec_program_mvp/venv/bin/uvicorn offsec_program_mvp.main:app --host 0.0.0.0 --port 8000
+
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
